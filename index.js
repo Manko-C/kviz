@@ -30,39 +30,60 @@ const kerdesek = [
 var lista = []
 var gomb = document.getElementById('gomb')
 var answers = document.getElementById('jatekmezo')
-
+var helyes = 0;
+var helytelen = 0;
 gomb.addEventListener('click', function kviz(){
     gomb.remove();
-    let szam = 1;
+    
     let random =Math.floor(Math.random() * kerdesek.length)
     let kerdes = document.createElement('span');
     answers.appendChild(kerdes)
-    kerdes.innerText = szam + ". kérdés: " + kerdesek[random].kerdes
+    kerdes.innerText = "kérdés: " + kerdesek[random].kerdes
     kerdesek[random].valasz.forEach(function (elem){
         var valaszok = document.createElement('button');
         valaszok.innerText = elem.text;
         answers.appendChild(valaszok);
-        valaszok.addEventListener("click", function(){
+        valaszok.addEventListener("click", function (){
             if (elem.correct == true){
                 valaszok.style.backgroundColor = "green"
                 answers.style.backgroundColor = "white"
                 let kovetkezo = document.createElement("button")
                 kovetkezo.innerText = "Következő kérdés"
                 answers.appendChild(kovetkezo);
-                szam++;
                 lista.push(random)
-
+                helyes ++;
+                document.getElementById('helyes').innerText = "helyes válaszaid: "+helyes 
                 kovetkezo.addEventListener('click', function(){
-                    random =Math.floor(Math.random() * kerdesek.length)
+                    answers.style.backgroundColor= "white";
+                    random = Math.floor(Math.random() * kerdesek.length)
                     if (!lista.includes(random)){
                         answers.innerHTML = ""
                         kviz()
+                        
                     }
+
                     
                 })
             }
             else{
                 answers.style.backgroundColor = "red"
+                let kovetkezo = document.createElement("button")
+                kovetkezo.innerText = "Következő kérdés"
+                answers.appendChild(kovetkezo);
+                lista.push(random)
+                helytelen ++;
+                document.getElementById('helytelen').innerText = "helyes válaszaid: "+helytelen
+                kovetkezo.addEventListener('click', function(){
+                    answers.style.backgroundColor= "white";
+                    random = Math.floor(Math.random() * kerdesek.length)
+                    if (!lista.includes(random)){
+                        answers.innerHTML = ""
+                        kviz()
+                        
+                    }
+
+                    
+                })
             }
         });
         
