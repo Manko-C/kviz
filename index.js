@@ -27,7 +27,7 @@ const kerdesek = [
         ]
     }
 ];
-
+var lista = []
 var gomb = document.getElementById('gomb')
 var answers = document.getElementById('jatekmezo')
 
@@ -50,9 +50,15 @@ gomb.addEventListener('click', function kviz(){
                 kovetkezo.innerText = "Következő kérdés"
                 answers.appendChild(kovetkezo);
                 szam++;
+                lista.push(random)
+
                 kovetkezo.addEventListener('click', function(){
-                    answers.innerHTML = ""
-                    kviz()
+                    random =Math.floor(Math.random() * kerdesek.length)
+                    if (!lista.includes(random)){
+                        answers.innerHTML = ""
+                        kviz()
+                    }
+                    
                 })
             }
             else{
