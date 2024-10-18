@@ -1,0 +1,25 @@
+body{
+    background-color: gainsboro;
+    text-align: center;
+}
+#jatekmezo{
+    background-color: white;
+    text-align: center;
+    width: 500px;
+    height: 300px;
+    display: flex;
+    justify-content: center;
+    margin: auto;
+    display: inline-block;
+}
+li{
+    text-decoration: none;
+}
+button{
+    margin-top: 15px;
+    width: 350px;
+    height: 30px;
+    color: black;
+    background-color: lightgreen;
+
+}
