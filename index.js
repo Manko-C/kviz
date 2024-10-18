@@ -34,8 +34,12 @@ var helyes = 0;
 var helytelen = 0;
 gomb.addEventListener('click', function kviz(){
     gomb.remove();
-    
-    let random =Math.floor(Math.random() * kerdesek.length)
+    console.log(lista)
+    let random;
+    do {
+        random = Math.floor(Math.random() * kerdesek.length);
+    } 
+    while (lista.includes(random) && lista.length < kerdesek.length); 
     let kerdes = document.createElement('span');
     answers.appendChild(kerdes)
     kerdes.innerText = "kérdés: " + kerdesek[random].kerdes
@@ -44,23 +48,22 @@ gomb.addEventListener('click', function kviz(){
         valaszok.innerText = elem.text;
         answers.appendChild(valaszok);
         valaszok.addEventListener("click", function (){
+            if (helyes + helytelen != 3){
             if (elem.correct == true){
                 valaszok.style.backgroundColor = "green"
                 answers.style.backgroundColor = "white"
                 let kovetkezo = document.createElement("button")
                 kovetkezo.innerText = "Következő kérdés"
                 answers.appendChild(kovetkezo);
-                lista.push(random)
                 helyes ++;
+                lista.push(random)
                 document.getElementById('helyes').innerText = "helyes válaszaid: "+helyes 
                 kovetkezo.addEventListener('click', function(){
                     answers.style.backgroundColor= "white";
-                    random = Math.floor(Math.random() * kerdesek.length)
-                    if (!lista.includes(random)){
-                        answers.innerHTML = ""
-                        kviz()
+                    answers.innerHTML = ""
+                    kviz()
                         
-                    }
+                    
 
                     
                 })
@@ -70,23 +73,25 @@ gomb.addEventListener('click', function kviz(){
                 let kovetkezo = document.createElement("button")
                 kovetkezo.innerText = "Következő kérdés"
                 answers.appendChild(kovetkezo);
-                lista.push(random)
                 helytelen ++;
-                document.getElementById('helytelen').innerText = "helyes válaszaid: "+helytelen
+                document.getElementById('helytelen').innerText = "helytelen válaszaid: "+helytelen
                 kovetkezo.addEventListener('click', function(){
+                    
                     answers.style.backgroundColor= "white";
-                    random = Math.floor(Math.random() * kerdesek.length)
-                    if (!lista.includes(random)){
                         answers.innerHTML = ""
                         kviz()
                         
-                    }
 
                     
                 })
             }
+        }
+        else{
+            answers.innerHTML = "Vége"
+        }
         });
-        
+    
     });
+
 });
 gomb.removeAttribute("onclick")
