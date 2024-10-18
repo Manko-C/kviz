@@ -61,11 +61,7 @@ gomb.addEventListener('click', function kviz(){
                 kovetkezo.addEventListener('click', function(){
                     answers.style.backgroundColor= "white";
                     answers.innerHTML = ""
-                    kviz()
-                        
-                    
-
-                    
+                    kviz()   
                 })
             }
             else{
